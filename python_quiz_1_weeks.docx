@@ -11,6 +11,12 @@ Template - Compute the number of seconds in a given number of hours, minutes, an
 # Expected output
 # Student should look at the following comments and compare to printed output.
 
+hours = 7
+mins = 21
+seconds = 37
+
+convert = (hours * 60 ** 2) + (mins * 60 ** 1) + (seconds * 60 ** 0)
+
 #26497
  
 """
@@ -21,6 +27,8 @@ Template - Compute the length of a rectangle's perimeter, given its width and he
 # Rectangle perimeter formula
 # Student should enter statement on the next line.
 
+ms_w = 4
+ms_h = 7
 
 
 ###################################################
@@ -43,6 +51,9 @@ Template - Compute the area of a rectangle, given its width and height.
 # Student should look at the following comments and compare to printed output.
 
 #28
+
+ms_w = 4
+ms_h = 7
  
 """
 Compute the circumference of a circle, given the length of its radius.
@@ -57,6 +68,8 @@ Compute the circumference of a circle, given the length of its radius.
 ###################################################
 # Expected output
 # Student should look at the following comments and compare to printed output.
+
+ms_radius = 8 # inches
 
 #50.24
  
