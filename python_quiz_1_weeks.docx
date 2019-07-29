@@ -1,0 +1,164 @@
+"""
+Template - Compute the number of seconds in a given number of hours, minutes, and seconds.
+"""
+
+###################################################
+# Hours, minutes, and seconds to seconds conversion formula
+# Student should enter statement on the next line.
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#26497
+ 
+"""
+Template - Compute the length of a rectangle's perimeter, given its width and height.
+"""
+
+###################################################
+# Rectangle perimeter formula
+# Student should enter statement on the next line.
+
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#22
+ 
+"""
+Template - Compute the area of a rectangle, given its width and height.
+"""
+
+###################################################
+# Rectangle area formula
+# Student should enter statement on the next line.
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#28
+ 
+"""
+Compute the circumference of a circle, given the length of its radius.
+"""
+
+###################################################
+# Circle circumference formula
+# Student should enter statement on the next line.
+
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#50.24
+ 
+"""
+Template - Compute the area of a circle, given the length of its radius.
+"""
+
+###################################################
+# Circle area formula
+# Student should enter statement on the next line.
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#200.96
+ 
+"""
+Template - Compute a name tag, given the first and last name.
+"""
+
+###################################################
+# Name tag formula
+# Student should enter statement on the next line.
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#My name is Joe Warren.
+ 
+"""
+Template - Compute the statement about a person's name and age, given the person's name and age.
+"""
+###################################################
+# Name and age formula
+# Student should enter statement on the next line.
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#Joe Warren is 56 years old.
+ 
+"""
+Template - Compute the distance between the points (x0, y0) and (x1, y1).
+"""
+
+###################################################
+# Distance formula
+# Student should enter statement on the next line.
+
+# Hint: You need to use the power operation ** .
+
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+#5.0
+ 
+# Compute the number of feet corresponding to a number of miles.
+
+###################################################
+# Tests
+# Student should uncomment ONLY ONE of the following at a time.
+
+# Test 1 - Select the following lines and use ctrl+shift+k to uncomment.
+# feet = miles * 5280.0
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+# Test 1 output:
+#13 miles equals 68640 feet.
+
+# Test 2 output:
+#57 miles equals 300960 feet.
+
+# Test 3 output:
+#82.67 miles equals 436497.6 feet.
+ 
+"""
+Template - Compute the number of seconds in a given number of hours, minutes, and seconds.
+"""
+
+###################################################
+# Tests
+# Student should uncomment ONLY ONE of the following at a time.
+
+###################################################
+# Expected output
+# Student should look at the following comments and compare to printed output.
+
+# Test 1 output:
+#7 hours, 21 minutes, and 37 seconds totals to 26497 seconds.
+
+# Test 2 output:
+#10 hours, 1 minutes, and 7 seconds totals to 36067 seconds.
+
+# Test 3 output:
+#1 hours, 0 minutes, and 1 seconds totals to 3601 seconds.
+
