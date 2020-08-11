@@ -377,8 +377,6 @@ def test_baseball_statistics():
                         "walks": "BB",                     # Walks field name
                         "battingfields": ["AB", "H", "2B", "3B", "HR", "BB"]}
 
-    yearid = 'yearID'
-
     print("Top 5 batting averages in 1923")
     top_batting_average_1923 = compute_top_stats_year(baseballdatainfo, batting_average, 5, 1923)
     for player in top_batting_average_1923:
@@ -423,6 +421,7 @@ def test_baseball_statistics():
 # Make sure the following call to test_baseball_statistics is
 # commented out when submitting to OwlTest/CourseraTest.
 
+yearid = 'yearID'
 
 filename = 'Batting.csv'
 separator = ','
