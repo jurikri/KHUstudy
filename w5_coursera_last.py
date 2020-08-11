@@ -139,7 +139,7 @@ def filter_by_year(statistics, year, yearid):
     """
     out=[]
     for i in range(len(statistics)):
-        if statistics[i]['year'] == str(year): out.append(statistics[i])
+        if statistics[i][yearid] == str(year): out.append(statistics[i])
 
     return out
 
@@ -149,13 +149,8 @@ separator = ','
 quote = '"'
 statistics = read_csv_as_list_dict(filename, separator, quote)
 
-forID = read_csv_as_nested_dict(filename, keyfield, separator, quote)
-yearid = list(forID.keys())
 year = 2020
-out1 = filter_by_year(statistics, year, yearid)
-
-year = 2000
-out1 = filter_by_year(statistics, year, yearid)
+out1 = filter_by_year(statistics, year, 'year')
 
 
 def top_player_ids(info, statistics, formula, numplayers):
@@ -176,6 +171,10 @@ def top_player_ids(info, statistics, formula, numplayers):
     # np.nan
     # np.zeros로 preallocation
     # np.argsort로 sorting
+    # list(dictype.keys())
+    # np.argsort(career.values())[::-1]
+    # compute_top_stats_career는 모든 데이터의 합으로 정의하겠음
+    
     score = np.zeros(len(statistics)) * np.nan
     for i in range(len(statistics)):
         score[i] = (formula(info, statistics[i]))
@@ -224,7 +223,6 @@ def lookup_player_names(info, top_ids_and_stats):
 
     return out
 
-
 filename = 'batting2.csv'
 keyfield = 'year'
 separator = ','
@@ -242,7 +240,6 @@ master = read_csv_as_list_dict(filename, separator, quote)
 
 lookup_player_names(info, top_ids_and_stats)
 
-
 def compute_top_stats_year(info, formula, numplayers, year):
     """
     Inputs:
@@ -256,16 +253,31 @@ def compute_top_stats_year(info, formula, numplayers, year):
       Returns a list of strings for the top numplayers in the given year
       according to the given formula.
     """
+    statistics_filtered = filter_by_year(statistics, year, yearid)
+    out = top_player_ids(info, statistics_filtered, formula, numplayers)
     
+    # return이 탑 플레이어의 뭘 달라는건지? ID만 달라는것 같은데 걍 tuple로 둠.
+    
+    return out
 
-    info
-    formula(info, batting_stats)
-    
-    batting_average
-    
-    
-    return []
+filename = 'batting3.csv'
+keyfield = 'playerID'
+separator = ','
+quote = '"'
+statistics = read_csv_as_list_dict(filename, separator, quote)
 
+yearid = 'yearID'
+
+filename = 'master3.csv'
+keyfield = 'year'
+separator = ','
+quote = '"'
+master = read_csv_as_list_dict(filename, separator, quote)
+
+formula = onbase_percentage
+numplayers = 10
+year = 2004
+compute_top_stats_year(info, formula, numplayers, year)
 
 ##
 ## Part 2: Functions to compute top batting statistics by career
@@ -282,7 +294,28 @@ def aggregate_by_player_id(statistics, playerid, fields):
       are dictionaries of aggregated stats.  Only the fields from the fields
       input will be aggregated in the aggregated stats dictionaries.
     """
-    return {}
+    out = {}
+    for i in range(len(statistics)):
+        row = statistics[i]
+        mskeys = list(row.keys())
+        nest = []
+        for j in range(len(mskeys)):
+            if mskeys[j] in fields:
+                nest.append({mskeys[j] : row[mskeys[j]]})
+            
+        out[row[playerid]] = nest
+    
+    return out # nested dictionary가 정확히 list에 들어간 dict을 말하는건지는 잘 모르겠네요.
+
+filename = 'batting4.csv'
+playerid = 'playerID'
+separator = ';'
+quote = "'"
+statistics = read_csv_as_list_dict(filename, separator, quote)
+
+fields = ['teamID', 'G', 'AB', 'R', 'H', '3B'] 
+
+aggregate_by_player_id(statistics, playerid, fields)
 
 
 def compute_top_stats_career(info, formula, numplayers):
@@ -294,7 +327,25 @@ def compute_top_stats_career(info, formula, numplayers):
                     computes a compound statistic
       numplayers  - Number of top players to return
     """
-    return []
+    playerid
+    statistics
+    
+    career = {}
+    for i in range(len(statistics)):
+        value = formula(info, statistics[i])
+        msid = statistics[i][playerid]
+        
+        if msid in list(career.keys()):
+            career[msid] = career[msid] + value
+        elif not(msid in list(career.keys())):
+            career[msid] = value
+            
+    rix = np.argsort(list(career.values()))[::-1][:numplayers]
+    
+    out = []
+    for i in rix: 
+        out.append(list(career.keys())[i])
+    return out
 
 
 ##
@@ -326,6 +377,8 @@ def test_baseball_statistics():
                         "walks": "BB",                     # Walks field name
                         "battingfields": ["AB", "H", "2B", "3B", "HR", "BB"]}
 
+    yearid = 'yearID'
+
     print("Top 5 batting averages in 1923")
     top_batting_average_1923 = compute_top_stats_year(baseballdatainfo, batting_average, 5, 1923)
     for player in top_batting_average_1923:
@@ -353,9 +406,8 @@ def test_baseball_statistics():
     # You can also use lambdas for the formula
     #  This one computes onbase plus slugging percentage
     print("Top 10 OPS in 2010")
-    top_ops_2010 = compute_top_stats_year(baseballdatainfo,
-                                          lambda info, stats: (onbase_percentage(info, stats) +
-                                                               slugging_percentage(info, stats)),
+    top_ops_2010 = compute_top_stats_year(baseballdatainfo, \
+                                          lambda info, stats: (onbase_percentage(info, stats) + slugging_percentage(info, stats)),
                                           10, 2010)
     for player in top_ops_2010:
         print(player)
@@ -371,10 +423,17 @@ def test_baseball_statistics():
 # Make sure the following call to test_baseball_statistics is
 # commented out when submitting to OwlTest/CourseraTest.
 
+
+filename = 'Batting.csv'
+separator = ','
+quote = "'"
+statistics = read_csv_as_list_dict(filename, separator, quote)
+
+filename = 'Master.csv'
+separator = ','
+quote = "'"
+master = read_csv_as_list_dict(filename, separator, quote)
 test_baseball_statistics()
-
-
-
 
 
 
