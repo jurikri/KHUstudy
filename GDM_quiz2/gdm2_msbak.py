@@ -119,7 +119,7 @@ def partial_differentiation_beta1(fx, x, beta0, beta1):
 beta0 = random.randrange(-100,100)  # 저번 이차 방정식에서 사용했던 랜덤 시작값을 그대로 써볼게요.
 beta1 = random.randrange(-100,100)
 lr = 0.0001; d0 = None; d1 = None 
-# d0, d1를 선언해도되고 안해도 됩니다. 안하면 에러로 잘못 인식되서 그냥합니다.
+# d0, d1를 선언해도되고 안해도 됩니다. 안하면 에러로 잘못 인식되서 거슬리므로 그냥 선언하겠습니다.
 loss_save = []
 for epoch in range(300000):
     if epoch != 0:
